@@ -35,6 +35,7 @@ export function SignupForm(props) {
                 password,
                 confirmPassword
             }),
+            credentials: 'include'
         });
 
         if (response.ok) {

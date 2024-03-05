@@ -9,7 +9,10 @@ const app = express();
  
 app.use(bodyParser.json());
 app.use(cookieParser());
-app.use(cors());
+app.use(cors({
+    origin:"http://localhost:3000",
+    credentials:true, 
+}))
 
 // Connect to MongoDB database 
 mongoose.connect(process.env.MONGODB_URI, {
@@ -21,6 +24,21 @@ mongoose.connect(process.env.MONGODB_URI, {
     console.error('Error connecting to MongoDB:', error);
 });
 
+function verifyToken(req, res, next) { 
+    
+    let token = req.cookies.refreshToken;
+    // console.log(token);
+    jwt.verify(token, "gaganDheep", (err, data) => {
+      if (!err) {
+        next(); 
+      } 
+      else {
+        return res.status(401).send({message: "Invalid Token"});
+  
+      }
+    })
+    // console.log("coming from midd"); 
+  }
 app.use('/api/users', userRoutes);
 
 const PORT = process.env.PORT || 3000;  

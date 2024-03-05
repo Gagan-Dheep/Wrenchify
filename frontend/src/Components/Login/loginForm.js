@@ -29,6 +29,7 @@ export function LoginForm(props) {
                 email,
                 password
             }),
+            credentials: 'include'
         });
 
         if (response.ok) {
