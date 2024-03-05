@@ -3,6 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const userRoutes = require('./routes/usersRoute');
+const logoutHandle = require('./routes/logoutHandle');
 const cookieParser = require('cookie-parser');
 const cors = require('cors')
 const app = express(); 
@@ -39,7 +40,10 @@ function verifyToken(req, res, next) {
     })
     // console.log("coming from midd"); 
   }
+
 app.use('/api/users', userRoutes);
+app.use('/api', logoutHandle);
+
 
 const PORT = process.env.PORT || 3000;  
 app.listen(PORT, () => {
