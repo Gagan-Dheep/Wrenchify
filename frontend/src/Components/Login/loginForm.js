@@ -18,6 +18,12 @@ export function LoginForm(props) {
 
   const { switchToSignup } = useContext(AccountContext);
 
+  const clearInput = async (e) => {
+    e.preventDefault();
+    setEmail('');
+    setPassword('');
+};
+
   const handleLogin = async (e) => {
     e.preventDefault();
 
@@ -54,7 +60,7 @@ export function LoginForm(props) {
       <Marginer direction="vertical" margin={10} />
       <MutedLink href="#">Forget your password?</MutedLink>
       <Marginer direction="vertical" margin="1.6em" />
-      <SubmitButton type="submit" onClick={(e) => handleLogin(e)}>Signin</SubmitButton>
+      <SubmitButton type="submit" onClick={(e) => handleLogin(e)  && clearInput(e)}>Signin</SubmitButton>
       <Marginer direction="vertical" margin="5px" />
       <LineText>
         Don't have an accoun?{" "}

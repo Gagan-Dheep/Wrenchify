@@ -21,6 +21,15 @@ export function SignupForm(props) {
   const [errorMessage, setErrorMessage] = useState('');
 
   const { switchToSignin } = useContext(AccountContext);
+  const clearInput = async (e) => {
+    e.preventDefault();
+    setName('');
+    setPassword('');
+    setEmail('');
+    setMobile('');
+    setConfirmPassword('');
+};
+
   const handleSignUp = async (e) => {
     e.preventDefault();
 
@@ -60,7 +69,7 @@ export function SignupForm(props) {
         <Input type="password" value={confirmPassword} placeholder="Confirm Password" onChange={(e) => setConfirmPassword(e.target.value)}/>
       </FormContainer>
       <Marginer direction="vertical" margin={10} />
-      <SubmitButton type="submit" onClick={(e) => handleSignUp(e)}>Signup</SubmitButton>
+      <SubmitButton type="submit" onClick={(e) => handleSignUp(e) && clearInput(e)}>Signup</SubmitButton>
       <Marginer direction="vertical" margin="5px" />
       <LineText>
         Already have an account?{" "}
